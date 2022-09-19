@@ -1,0 +1,46 @@
+---
+title: "Effects of calendar seasonality in Indian calendar system"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+bibliography: references.bib
+---
+
+# Effects of calendar seasonality on economic output
+
+Calendar have enormous effect on economic, social and cultural behaviors but nowhere it is profound than a country or region's economic output indicators such as industrial output, CPI, stock-market transaction, import-exports but in a globalized world, all of the economic time-series modelling is modeled around Gregorian calendar system. In a country like India with multiple regions and festivals from multiple religion as well, a single calendar will not be sufficient to model various seasonal component. For example, during the festival month of Diwali, consumer consumption rate is usually higher and during the month, industrial output is generally lower.
+
+### Previous Work
+
+There have been significant work published already to identify and remove multiple lagged seasonality from time-series [@delivera2011] considering technical papers published from The US Bureau of Census[^1]. There also have been significant work done to identify and remove seasonality, especially concerning religious festival based on Gregorian calendar by the Bank of Spain[@maravall2000]. Similar work is present for lunar[^2] and luni-solar[^3] based calendar system as well. Similar work in the context of Indian seasonality effect is also present[^4][^5][^6].
+
+[^1]: <https://www.google.co.in/books/edition/The_X_11_Variant_of_the_Census_Method_II/BFIfiGmatUoC?hl=en&gbpv=0&kptab=overview>
+
+[^2]: <https://www.census.gov/library/working-papers/2002/adrm/lin-01.html>
+
+[^3]: <https://assets.cambridge.org/97811070/57623/frontmatter/9781107057623_frontmatter.pdf>
+
+[^4]: <https://www.nipfp.org.in/media/medialibrary/2016/01/WP_2016_160.pdf>
+
+[^5]: <https://www.census.gov/content/dam/Census/library/working-papers/2017/adrm/rrs2017-04.pdf>
+
+[^6]: <https://journals.indexcopernicus.com/api/file/viewByFileId/690045.pdf>
+
+### A comparative Analysis on calendar seasonality with Indian calendar system
+
+On this idea, I performed an analysis of calendar effects creeping in crucial economic identifier such as Industrial output[^7]. In the mentioned study, I tried to identify presence of calendar seasonality with Diwali as anchor point using X-13ARIMA-SEATS[@seasonal].
+
+[^7]: <https://rpubs.com/saradindu/944049>
+
+I used [@VedicDateTime] to generate date corresponding to available dates based on Gregorian calendar system, then used [@seasonal] package to generate time-series based on that.
+
+`seasonal::seas()` is used to generate and test the robustness of the ARIMA model. A detailed comparative analysis is also present.
+
+In summary, it was evident that due to presence of seasonal component, the time series was distorted and using a simple pre-post regressor model, the seasonality can be identified and adjusted.
+
+### Future Work
+
+Since, there is no comprehensive work done on understanding various seasonal component of the Indian calendar system and its effect on economic output metrics, it would be pertinent to pursue work on identifying various monthly and quarterly seasonal component.
+
+Moreover, the existing developed package `VedicDateTime`, needs to be updated with dates of significant festivals of the Vedic calendars which drives economic activities.
