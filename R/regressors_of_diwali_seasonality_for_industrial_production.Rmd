@@ -50,7 +50,7 @@ m1 <- seas(industrial_prod, xreg = cbind(pre_diwali_ts, post_diwali_ts), regress
 summary(m1)
 ```
 
-The seasonal co-efficient shows minor decline during pre and post Diwali season across the time-series. In the below unadjusted v adjusted seasonal plot it can be observed that seasonal adjustment based on Diwali season removes distortion from the time-series.
+The seasonal co-efficient shows minor decline during pre and post Diwali season across the time-series. In the below unadjusted v adjusted seasonal plot it can be observed that seasonal adjustment based on Diwali season .
 
 ```{r}
 plot(m1)
