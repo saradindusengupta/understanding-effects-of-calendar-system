@@ -38,7 +38,7 @@ ts.plot(post_diwali_ts,lwd = c(2, 1))
 
 ### Including user defined regressors
 
-The `seasonal` package allows to add user-defined regressors to remove seasonality from a time-series. Here `pre_diwali_ts` and `post_diwali_ts` are added in the main seasonal adjustment. `X-13ARIMA-SEATS` is used to adjust for the festival seasonal component.
+The `seasonal` package allows to add user-defined regressors to remove seasonality from a time-series. Here `pre_diwali_ts` and `post_diwali_ts` are added in the main seasonal adjustment. `X-13ARIMA-SEATS` is used to adjust for the .
 
 ```{r}
 m1 <- seas(industrial_prod, xreg = cbind(pre_diwali_ts, post_diwali_ts), regression.usertype = "holiday", x11 = list())
