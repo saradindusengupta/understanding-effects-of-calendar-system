@@ -1,0 +1,17 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(forecast)
+library(seasonal)
+industrial_prod <- window(seasonal::iip, start = 2000)
+```
+```{r}
+elec1 <- forecast::msts(industrial_prod, start=2000)
+#fit <- forecast::tbats(elec1)
+#plot(fit)
+```
+
+
