@@ -7,7 +7,7 @@ output:
 bibliography: references.bib
 ---
 
-Since Diwali is the most important festival of India and the timing of its distorts the monthly time-series of industrial production heavily. Generally Diwali is celebrated in the month of October according to Gregorian Calendar but that is not fixed and depending on which month it is celebrated the industrial production index also changes. The standard software packages for seasonal adjustment, `X-12-ARIMA` and `X-13-ARIMA-SEATS` (developed by the U.S. Census Bureau) or Tramo Seats (developed by the Bank of Spain) have a built-in adjustment procedure for Easter holiday, but not for Diwali. However, all packages allow for the inclusion of user defined variables, and the Chinese New Year can be modeled as such. `seasonal` [@seasonal] is an interface to X-13ARIMA-SEATS.
+Diwali is the most important festival of India and the timing of its distorts the monthly time-series of industrial production heavily. Generally Diwali is celebrated in the month of October according to Gregorian Calendar but that is not fixed and depending on which month it is celebrated the industrial production index also changes. The standard software packages for seasonal adjustment, `X-12-ARIMA` and `X-13-ARIMA-SEATS` (developed by the U.S. Census Bureau) or Tramo Seats (developed by the Bank of Spain) have a built-in adjustment procedure for Easter holiday, but not for Diwali. However, all packages allow for the inclusion of user defined variables, and the Chinese New Year can be modeled as such. `seasonal` [@seasonal] is an interface to X-13ARIMA-SEATS.
 
 ```{r}
 library(seasonal)
@@ -38,7 +38,7 @@ ts.plot(post_diwali_ts,lwd = c(2, 1))
 
 ### Including user defined regressors
 
-The `seasonal` package allows to add user-defined regressors to remove seasonality from a time-series. Here `pre_diwali_ts` and `post_diwali_ts` are added in the main seasonal adjustment. `X-13ARIMA-SEATS` is used to adjust for the .
+The `seasonal` package allows to add user-defined regressors to remove seasonality from a time-series. Here `pre_diwali_ts` and `post_diwali_ts` are added in the main seasonal adjustment. `X-13ARIMA-SEATS` is used to adjust for the festival seasonal component.
 
 ```{r}
 m1 <- seas(industrial_prod, xreg = cbind(pre_diwali_ts, post_diwali_ts), regression.usertype = "holiday", x11 = list())
@@ -50,7 +50,7 @@ m1 <- seas(industrial_prod, xreg = cbind(pre_diwali_ts, post_diwali_ts), regress
 summary(m1)
 ```
 
-The seasonal co-efficient shows minor decline during pre and post Diwali season across the time-series. In the below unadjusted v adjusted seasonal plot it can be observed that seasonal adjustment based on Diwali season .
+The seasonal co-efficient shows minor decline during pre and post Diwali season across the time-series. In the below unadjusted v adjusted seasonal plot it can be observed that seasonal adjustment based on Diwali season removes distortion from the time-series.
 
 ```{r}
 plot(m1)
