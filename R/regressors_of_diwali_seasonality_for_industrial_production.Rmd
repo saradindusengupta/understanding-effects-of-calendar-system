@@ -12,6 +12,7 @@ Diwali is the most important festival of India and the timing of its distorts th
 ```{r}
 library(seasonal)
 library(VedicDateTime)
+library(insol)
 data(seasonal)
 data(holiday)
 ```
@@ -20,6 +21,20 @@ data(holiday)
 
 ```{r}
 industrial_prod <- window(iip, start = 2000)
+```
+### Converted Diwali dates to vedicdatetime compatible datetimes
+```{r}
+date<- seasonal::diwali
+date <- as.POSIXct.Date(date)
+julianday <- insol::JD(date)
+
+samvatsara_convt = c()
+
+for (i in 1:length(julianday)) 
+{
+  masa_num <- VedicDateTime::masa(julianday[i], c(15.34, 75.13,+5.5))
+  samvatsara_convt = c(samvatsara_convt,VedicDateTime::samvatsara(julianday[i],masa_num))
+}
 ```
 
 ### Generate time-series based on \`genhol()\` function using dates of Diwali as input
