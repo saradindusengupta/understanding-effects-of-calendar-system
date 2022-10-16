@@ -10,6 +10,7 @@ bibliography: references.bib
 Diwali is the most important festival of India and the timing of its distorts the monthly time-series of industrial production heavily. Generally Diwali is celebrated in the month of October according to Gregorian Calendar but that is not fixed and depending on which month it is celebrated the industrial production index also changes. The standard software packages for seasonal adjustment, `X-12-ARIMA` and `X-13-ARIMA-SEATS` (developed by the U.S. Census Bureau) or Tramo Seats (developed by the Bank of Spain) have a built-in adjustment procedure for Easter holiday, but not for Diwali. However, all packages allow for the inclusion of user defined variables, and the Chinese New Year can be modeled as such. `seasonal` [@seasonal] is an interface to X-13ARIMA-SEATS.
 
 ```{r}
+rm(list = ls())
 library(seasonal)
 library(VedicDateTime)
 library(insol)
@@ -21,37 +22,82 @@ data(holiday)
 
 ```{r}
 industrial_prod <- window(iip, start = 2000)
+industrial_prod
 ```
+
+## Convert Gregorian dates of Diwali holidays to Vedic calendar dates
+
+```{r}
+get_vedic_date<- function(julian_day, place) {
+  
+masa_num <- VedicDateTime::masa(julian_day, place)
+vikram_samvatsara = VedicDateTime::elapsed_year(julian_day, masa_num)[5]
+tithi_ = tithi(julian_day, place)[1]
+masa_ = masa(julian_day, place)[1]
+vedic_dates = paste(as.character(vikram_samvatsara),"-",as.character(masa_),"-",as.character(tithi_), sep = "") 
+return(vedic_dates)
+}
+```
+
 ### Converted Diwali dates to vedicdatetime compatible datetimes
+
 ```{r}
 date<- seasonal::diwali
 date <- as.POSIXct.Date(date)
 julianday <- insol::JD(date)
 
-samvatsara_convt = c()
+
+place <- c(15.34, 75.13, +5.5) #Latitude, Longitude and timezone of the location
+diwali_vedic_calendar = c()
 
 for (i in 1:length(julianday)) 
 {
-  masa_num <- VedicDateTime::masa(julianday[i], c(15.34, 75.13,+5.5))
-  samvatsara_convt = c(samvatsara_convt,VedicDateTime::samvatsara(julianday[i],masa_num))
+  diwali_vedic_calendar = c(diwali_vedic_calendar, get_vedic_date(julianday[i], place))
 }
+diwali_vedic_calendar
 ```
 
 ### Generate time-series based on \`genhol()\` function using dates of Diwali as input
 
+### Generate time-series based on Vedic calendar dates of Diwali
+
 ```{r}
-pre_diwali_ts <- genhol(diwali, start = -6, end = -1, center = "mean")
-post_diwali_ts <- genhol(diwali, start = 0, end = 6, center = "mean")
+pre_diwali_ts_vedic <- genhol(as.Date(diwali_vedic_calendar), start = -6, end = -1, center = "mean")
+post_diwali_ts_vedic <- genhol(as.Date(diwali_vedic_calendar), start = 0, end = 6, center = "mean")
 ```
 
 `pre_diwali_ts` and `post_diwali_ts` both are of time-series class object and represent 2 time-series to include pre and post festival for better seasonal adjustment.
 
 ```{r}
+ts.plot(pre_diwali_ts_vedic,lwd = c(2, 1))
+ts.plot(post_diwali_ts_vedic,lwd = c(2, 1))
+```
+
+### Generate time-series with Gregorian calendar system for Diwali
+
+```{r}
+pre_diwali_ts<- genhol(seasonal::diwali, start = -6, end = -1, center = "mean")
+post_diwali_ts<- genhol(seasonal::diwali, start = 0, end = 6, center = "mean")
 ts.plot(pre_diwali_ts,lwd = c(2, 1))
 ts.plot(post_diwali_ts,lwd = c(2, 1))
 ```
 
 ### Including user defined regressors
+
+```{r}
+iip_data <- data.frame(Y=as.matrix(seasonal::iip), date=as.Date(zoo::as.yearmon(time(seasonal::iip))))
+date<- iip_data$date
+date <- as.POSIXct.Date(date)
+julianday_iip <- insol::JD(date)
+place <- c(15.34, 75.13, +5.5) #Latitude, Longitude and timezone of the location
+iip_vedic_calendar = c()
+for (i in 1:length(julianday_iip)) 
+{
+iip_vedic_calendar = c(iip_vedic_calendar, get_vedic_date(julianday_iip[i], place))
+}
+iip_data$date <- iip_vedic_calendar
+iip_vedic_data_ts <- ts(iip_data$Y,start=c(2061,2))
+```
 
 The `seasonal` package allows to add user-defined regressors to remove seasonality from a time-series. Here `pre_diwali_ts` and `post_diwali_ts` are added in the main seasonal adjustment. `X-13ARIMA-SEATS` is used to adjust for the festival seasonal component.
 
@@ -69,6 +115,7 @@ The seasonal co-efficient shows minor decline during pre and post Diwali season 
 
 ```{r}
 plot(m1)
+lines(iip_vedic_data_ts, col="red")
 ```
 
 ### Comparing the series

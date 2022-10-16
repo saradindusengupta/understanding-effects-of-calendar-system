@@ -28,16 +28,10 @@ There have been significant work published already to identify and remove multip
 [^6]: <https://journals.indexcopernicus.com/api/file/viewByFileId/690045.pdf>
 
 ### A comparative Analysis on calendar seasonality with Indian calendar system
-
-On this idea, I performed an analysis of calendar effects creeping in crucial economic identifier such as Industrial output[^7]. In the mentioned study, I tried to identify presence of calendar seasonality with Diwali as anchor point using X-13ARIMA-SEATS[@seasonal].
-
-[^7]: <https://rpubs.com/saradindu/944049>
-
-I used [@VedicDateTime] to generate date corresponding to available dates based on Gregorian calendar system, then used [@seasonal] package to generate time-series based on that.
-
-`seasonal::seas()` is used to generate and test the robustness of the ARIMA model. A detailed comparative analysis is also present.
-
-In summary, it was evident that due to presence of seasonal component, the time series was distorted and using a simple pre-post regressor model, the seasonality can be identified and adjusted.
+A comparative study was performed to understand calendar seasonality creeping in while modelling seasonal decomposition on time-series objects. especially on econometric data-sets. To understand if any methodologies can be obtained and to provide a better, quantitative understanding of the seasonality, India's Industrial output after the year 2000 and modelling holiday seasonality with Diwali dates corresponding to that. To understand calendar seasonality, dates of the festival of Diwali were obtained from @seasonal package and the dates were converted to Vedic calendar dates.
+Two different time-series were modeled, one with Gregorian calendar dates and another with Vedic calendar dates. A corresponding time-series object of India's industrial output from @seasonal package was also converted to Vedic calendar based time-series and scale.
+ In the both the cases, a seasonal decomposition was observed visible along the red line and `X-13 ARIMA SEATS` was used for seasonality decomposition. Due to change in type of calendar, missing values were omitted to keep the frequency of the time-series same for both calendar systems.
+@VedicDateTime was used for the all the date conversio  and conversion of time-series objects in the comparative study.
 
 ### Future Work
 
