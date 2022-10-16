@@ -1,0 +1,46 @@
+---
+title: "Convert Diwali dates from @seasonal package to vedic calendar dates"
+output: html_notebook
+---
+
+
+```{r}
+rm(list = ls())
+library(VedicDateTime)
+library(insol)
+library(seasonal)
+seasonal::diwali
+```
+```{r}
+date<- seasonal::diwali
+date <- as.POSIXct.Date(date)
+julianday <- insol::JD(date)
+julianday
+```
+
+
+```{r}
+place <- c(15.34, 75.13, +5.5) #Latitude, Longitude and timezone of the location
+diwali_vedic_calendar = c()
+```
+
+
+```{r}
+get_vedic_date<- function(julian_day, place) {
+  
+masa_num <- VedicDateTime::masa(julian_day, place)
+vikram_samvatsara = VedicDateTime::elapsed_year(julian_day, masa_num)[5]
+tithi_ = tithi(julian_day, place)[1]
+masa_ = masa(julian_day, place)[1]
+vedic_dates = paste(as.character(vikram_samvatsara),"-",as.character(masa_),"-",as.character(tithi_), sep = "") 
+return(vedic_dates)
+}
+```
+
+```{r}
+for (i in 1:length(julianday)) 
+{
+diwali_vedic_calendar = c(diwali_vedic_calendar, get_vedic_date(julianday[i], place))
+}
+diwali_vedic_calendar
+```
