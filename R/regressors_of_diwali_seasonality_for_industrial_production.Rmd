@@ -57,7 +57,7 @@ for (i in 1:length(julianday))
 diwali_vedic_calendar
 ```
 
-### Generate time-series based on \`genhol()\` function using dates of Diwali as input
+## Generate time-series based on \`genhol()\` function using dates of Diwali as input
 
 ### Generate time-series based on Vedic calendar dates of Diwali
 
@@ -73,7 +73,7 @@ ts.plot(pre_diwali_ts_vedic,lwd = c(2, 1))
 ts.plot(post_diwali_ts_vedic,lwd = c(2, 1))
 ```
 
-### Generate time-series with Gregorian calendar system for Diwali
+#### Generate time-series with Gregorian calendar system for Diwali
 
 ```{r}
 pre_diwali_ts<- genhol(seasonal::diwali, start = -6, end = -1, center = "mean")
@@ -83,6 +83,10 @@ ts.plot(post_diwali_ts,lwd = c(2, 1))
 ```
 
 ### Including user defined regressors
+
+### Converting India Industrial Output time-series object to Vedic Calendar system
+
+Converting \`seasonal::iip\` ts object to Vedic calendar based time-series object to model seasonality\
 
 ```{r}
 iip_data <- data.frame(Y=as.matrix(seasonal::iip), date=as.Date(zoo::as.yearmon(time(seasonal::iip))))
