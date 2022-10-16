@@ -14,6 +14,8 @@ rm(list = ls())
 library(seasonal)
 library(VedicDateTime)
 library(insol)
+library(forecast)
+library(zoo)
 data(seasonal)
 data(holiday)
 ```
@@ -101,6 +103,7 @@ iip_vedic_calendar = c(iip_vedic_calendar, get_vedic_date(julianday_iip[i], plac
 }
 iip_data$date <- iip_vedic_calendar
 iip_vedic_data_ts <- ts(iip_data$Y,start=c(2061,2))
+iip_vedic_data_ts
 ```
 
 The `seasonal` package allows to add user-defined regressors to remove seasonality from a time-series. Here `pre_diwali_ts` and `post_diwali_ts` are added in the main seasonal adjustment. `X-13ARIMA-SEATS` is used to adjust for the festival seasonal component.
@@ -138,4 +141,23 @@ The below chart also indicated a level of distortion present for industrial outp
 
 ```{r}
 ts.plot(final(m1), final(m2), col = c("red", "blue"), lwd = c(2, 1))
+```
+
+## Multi-seasonality decomposition for India industrial output
+
+### Seasonality decomposition for Industrial Output for Gregorian Calendar
+
+```{r}
+iip_tbats <- forecast::msts(industrial_prod, start=2000, seasonal.periods = c(1))
+fit <- forecast::tbats(iip_tbats)
+plot(fit)
+```
+
+### Seasonality decomposition for Industrial Output for Vedic Calendar
+
+```{r}
+
+iip_tbats_vedic <- forecast::msts(iip_vedic_data_ts, start=1921, seasonal.periods = c(1))
+fit_vedic <- forecast::tbats(iip_tbats_vedic)
+plot(fit_vedic)
 ```

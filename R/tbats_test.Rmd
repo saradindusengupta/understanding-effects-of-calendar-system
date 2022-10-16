@@ -11,7 +11,7 @@ industrial_prod <- window(seasonal::iip, start = 2000)
 ```{r}
 elec1 <- forecast::msts(industrial_prod, start=2000, seasonal.periods = c(1))
 fit <- forecast::tbats(elec1)
-plot(fit$errors)
+plot(fit)
 ```
 
 
