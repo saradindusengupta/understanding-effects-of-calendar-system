@@ -149,6 +149,8 @@ ts.plot(final(m1), final(m2), col = c("red", "blue"), lwd = c(2, 1))
 
 ### Seasonality decomposition for Industrial Output for Gregorian Calendar
 
+The start of the series is from year 2000 according to Gregoriann calendar system
+
 ```{r}
 iip_tbats <- forecast::msts(industrial_prod, start=2000, seasonal.periods = c(1))
 fit <- forecast::tbats(iip_tbats)
@@ -156,6 +158,8 @@ plot(fit)
 ```
 
 ### Seasonality decomposition for Industrial Output for Vedic Calendar
+
+The start of the series is 1921, according to Vedic calendar system which is equivalent to 2000
 
 ```{r}
 
