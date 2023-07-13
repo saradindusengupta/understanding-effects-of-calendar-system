@@ -1,0 +1,194 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Effects of calendar seasonality in Indian calendar system},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Effects of calendar seasonality in Indian calendar system}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\hypertarget{effects-of-calendar-seasonality-on-economic-output}{%
+\section{Effects of calendar seasonality on economic
+output}\label{effects-of-calendar-seasonality-on-economic-output}}
+
+Calendar have enormous effect on economic, social and cultural behaviors
+but nowhere it is profound than a country or region's economic output
+indicators such as industrial output, CPI, stock-market transaction,
+import-exports but in a globalized world, all of the economic
+time-series modelling is modeled around Gregorian calendar system. In a
+country like India with multiple regions and festivals from multiple
+religion as well, a single calendar will not be sufficient to model
+various seasonal component. For example, during the festival month of
+Diwali, consumer consumption rate is usually higher and during the
+month, industrial output is generally lower.
+
+\hypertarget{previous-work}{%
+\subsubsection{Previous Work}\label{previous-work}}
+
+There have been significant work published already to identify and
+remove multiple lagged seasonality from time-series (De Livera, Hyndman,
+and Snyder 2011) considering technical papers published from The US
+Bureau of Census\footnote{\url{https://www.google.co.in/books/edition/The_X_11_Variant_of_the_Census_Method_II/BFIfiGmatUoC?hl=en\&gbpv=0\&kptab=overview}}.
+There also have been significant work done to identify and remove
+seasonality, especially concerning religious festival based on Gregorian
+calendar by the Bank of Spain(Maravall and Sánchez 2000). Similar work
+is present for lunar\footnote{\url{https://www.census.gov/library/working-papers/2002/adrm/lin-01.html}}
+and luni-solar\footnote{\url{https://assets.cambridge.org/97811070/57623/frontmatter/9781107057623_frontmatter.pdf}}
+based calendar system as well. Similar work in the context of Indian
+seasonality effect is also present\footnote{\url{https://www.nipfp.org.in/media/medialibrary/2016/01/WP_2016_160.pdf}}\footnote{\url{https://www.census.gov/content/dam/Census/library/working-papers/2017/adrm/rrs2017-04.pdf}}\footnote{\url{https://journals.indexcopernicus.com/api/file/viewByFileId/690045.pdf}}.
+
+\hypertarget{a-comparative-analysis-on-calendar-seasonality-with-indian-calendar-system}{%
+\subsubsection{A comparative Analysis on calendar seasonality with
+Indian calendar
+system}\label{a-comparative-analysis-on-calendar-seasonality-with-indian-calendar-system}}
+
+A comparative study was performed to understand calendar seasonality
+creeping in while modelling seasonal decomposition on time-series
+objects. especially on econometric data-sets. To understand if any
+methodologies can be obtained and to provide a better, quantitative
+understanding of the seasonality, India's Industrial output after the
+year 2000 and modelling holiday seasonality with Diwali dates
+corresponding to that. To understand calendar seasonality, dates of the
+festival of Diwali were obtained from Sax and Eddelbuettel (2018)
+package and the dates were converted to Vedic calendar dates. Two
+different time-series were modeled, one with Gregorian calendar dates
+and another with Vedic calendar dates. A corresponding time-series
+object of India's industrial output from Sax and Eddelbuettel (2018)
+package was also converted to Vedic calendar based time-series and
+scale. In the both the cases, a seasonal decomposition was observed
+visible along the red line and \texttt{X-13\ ARIMA\ SEATS} was used for
+seasonality decomposition. Due to change in type of calendar, missing
+values were omitted to keep the frequency of the time-series same for
+both calendar systems. Bokde et al. (2022) was used for the all the date
+conversio and conversion of time-series objects in the comparative
+study.
+
+\hypertarget{future-work}{%
+\subsubsection{Future Work}\label{future-work}}
+
+Since, there is no comprehensive work done on understanding various
+seasonal component of the Indian calendar system and its effect on
+economic output metrics, it would be pertinent to pursue work on
+identifying various monthly and quarterly seasonal component.
+
+Moreover, the existing developed package \texttt{VedicDateTime}, needs
+to be updated with dates of significant festivals of the Vedic calendars
+which drives economic activities.
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-VedicDateTime}{}}%
+Bokde, Neeraj Dhanraj, Prajwal Kailasnath Patil, Saradindu Sengupta, and
+Andrés Elías Feijóo Lorenzo. 2022. {``VedicDateTime: Vedic Calendar
+System.''} \url{https://CRAN.R-project.org/package=VedicDateTime}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-delivera2011}{}}%
+De Livera, Alysha M., Rob J. Hyndman, and Ralph D. Snyder. 2011.
+{``Forecasting Time Series With Complex Seasonal Patterns Using
+Exponential Smoothing.''} \emph{Journal of the American Statistical
+Association} 106 (496): 1513--27.
+\url{https://doi.org/10.1198/jasa.2011.tm09771}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-maravall2000}{}}%
+Maravall, Agustín, and Fernando J. Sánchez. 2000. {``An Application of
+TRAMO-SEATS; Model Selection and Out-of-Sample Performance. The Swiss
+CPI Series.''} In, 121--30. Physica-Verlag HD.
+\url{https://doi.org/10.1007/978-3-642-57678-2_11}.
+
+\leavevmode\vadjust pre{\hypertarget{ref-seasonal}{}}%
+Sax, Christoph, and Dirk Eddelbuettel. 2018. {``Seasonal Adjustment by
+{\textbraceleft}x-13ARIMA-SEATS{\textbraceright} in
+{\textbraceleft}r{\textbraceright}''} 87.
+\url{https://doi.org/10.18637/jss.v087.i11}.
+
+\end{CSLReferences}
+
+\end{document}

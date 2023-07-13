@@ -1,7 +1,8 @@
 ---
 title: "Regressors of Diwali on Industrial Production of India"
 output:
-  pdf_document: default
+  pdf_document: 
+    keep_tex: yes
   html_document:
     df_print: paged
 bibliography: references.bib
