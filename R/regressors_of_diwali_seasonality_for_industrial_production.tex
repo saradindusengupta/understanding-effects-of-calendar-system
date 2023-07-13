@@ -152,24 +152,11 @@ Year can be modeled as such. \texttt{seasonal} (Sax and Eddelbuettel
 \begin{Highlighting}[]
 \FunctionTok{rm}\NormalTok{(}\AttributeTok{list =} \FunctionTok{ls}\NormalTok{())}
 \FunctionTok{library}\NormalTok{(seasonal)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning: package 'seasonal' was built under R version 4.2.3
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(VedicDateTime)}
 \FunctionTok{library}\NormalTok{(insol)}
 \FunctionTok{library}\NormalTok{(forecast)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## Warning: package 'forecast' was built under R version 4.2.3
-\end{verbatim}
 
 \begin{verbatim}
 ## Registered S3 method overwritten by 'quantmod':
@@ -184,10 +171,6 @@ Year can be modeled as such. \texttt{seasonal} (Sax and Eddelbuettel
 \end{Shaded}
 
 \begin{verbatim}
-## Warning: package 'zoo' was built under R version 4.2.3
-\end{verbatim}
-
-\begin{verbatim}
 ## 
 ## Attaching package: 'zoo'
 \end{verbatim}
@@ -200,6 +183,7 @@ Year can be modeled as such. \texttt{seasonal} (Sax and Eddelbuettel
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\NormalTok{opts\_chunk}\SpecialCharTok{$}\FunctionTok{set}\NormalTok{(}\AttributeTok{warning =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{message =} \ConstantTok{FALSE}\NormalTok{)}
 \FunctionTok{data}\NormalTok{(seasonal)}
 \FunctionTok{data}\NormalTok{(holiday)}
 \end{Highlighting}
@@ -214,41 +198,6 @@ Year can be modeled as such. \texttt{seasonal} (Sax and Eddelbuettel
 \NormalTok{industrial\_prod }\OtherTok{\textless{}{-}} \FunctionTok{window}\NormalTok{(iip, }\AttributeTok{start =} \DecValTok{2000}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## Warning in window.default(x, ...): 'start' value not changed
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{industrial\_prod}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##           Jan      Feb      Mar      Apr      May      Jun      Jul      Aug
-## 2005                             99.0838 103.0900 103.9666 102.4425 104.1004
-## 2006 118.4664 112.4255 126.7159 108.8396 114.8274 114.2126 117.6044 114.2655
-## 2007 134.8564 127.8147 144.8739 128.2021 136.8587 136.7408 136.6459 134.5998
-## 2008 152.5200 149.3196 161.8845 142.3296 146.7452 148.3757 144.2976 141.8657
-## 2009 144.3709 138.5057 153.5340 139.5905 144.2723 145.7417 146.7192 149.4225
-## 2010 163.6191 157.5185 176.4743 157.8465 156.5436 156.5543 161.3000 156.1000
-## 2011 175.9000 168.0000 193.1000 166.2000 166.2000 171.4000 167.2000 161.4000
-## 2012 177.6000 175.2000 187.6000 164.1000 170.3000 168.0000 167.1000 164.7000
-## 2013 182.0000 176.2000 194.2000 166.5000 166.0000 164.9000 171.4000 165.4000
-## 2014 184.0000 172.7000 193.3000 172.7000 175.3000 172.0000 173.0000 166.2000
-##           Sep      Oct      Nov      Dec
-## 2005 104.4108 107.3272 104.6366 116.8191
-## 2006 118.1773 117.6792 125.5368 132.7696
-## 2007 133.9824 140.7213 137.9242 150.7315
-## 2008 148.5866 146.1718 139.6522 148.2840
-## 2009 151.0090 149.6481 148.4985 162.3779
-## 2010 160.3000 166.6000 158.0000 175.6000
-## 2011 164.3000 158.3000 167.5000 180.3000
-## 2012 163.1000 171.6000 165.8000 179.3000
-## 2013 167.5000 169.6000 163.6000 179.5000
-## 2014 172.2000 162.5000 169.8000
-\end{verbatim}
 
 \hypertarget{convert-gregorian-dates-of-diwali-holidays-to-vedic-calendar-dates}{%
 \subsection{Convert Gregorian dates of Diwali holidays to Vedic calendar
@@ -286,34 +235,8 @@ date-times}\label{converted-diwali-dates-to-vedic-datetime-compatible-date-times
 \NormalTok{\{}
 \NormalTok{  diwali\_vedic\_calendar }\OtherTok{=} \FunctionTok{c}\NormalTok{(diwali\_vedic\_calendar, }\FunctionTok{get\_vedic\_date}\NormalTok{(julianday[i], place))}
 \NormalTok{\}}
-\NormalTok{diwali\_vedic\_calendar}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-##   [1] "1957-7-30" "1958-7-30" "1959-7-30" "1960-7-30" "1961-7-30" "1962-7-30"
-##   [7] "1963-7-29" "1964-7-30" "1965-7-30" "1966-7-30" "1967-7-30" "1968-7-30"
-##  [13] "1969-7-30" "1970-7-30" "1971-7-30" "1972-7-30" "1973-7-30" "1974-7-30"
-##  [19] "1975-7-30" "1976-7-30" "1977-7-30" "1978-7-29" "1979-7-30" "1980-7-30"
-##  [25] "1981-7-30" "1982-7-30" "1983-7-30" "1984-7-30" "1985-7-30" "1986-7-30"
-##  [31] "1987-7-30" "1988-7-29" "1989-7-30" "1990-7-30" "1991-7-30" "1992-7-30"
-##  [37] "1993-7-30" "1994-7-30" "1995-7-30" "1996-7-30" "1997-7-29" "1998-7-30"
-##  [43] "1999-7-30" "2000-7-30" "2001-7-30" "2002-7-30" "2003-7-30" "2004-7-30"
-##  [49] "2005-7-30" "2006-7-29" "2007-7-29" "2008-7-30" "2009-7-30" "2010-7-30"
-##  [55] "2011-7-30" "2012-7-30" "2013-7-30" "2014-7-30" "2015-7-30" "2016-7-29"
-##  [61] "2017-7-30" "2018-7-30" "2019-7-30" "2020-7-30" "2021-7-30" "2022-7-30"
-##  [67] "2023-7-30" "2024-7-30" "2025-7-30" "2026-7-30" "2027-7-30" "2028-7-30"
-##  [73] "2029-7-30" "2030-7-30" "2031-8-1"  "2032-7-30" "2033-7-30" "2034-7-30"
-##  [79] "2035-7-30" "2036-7-30" "2037-7-30" "2038-7-30" "2039-7-30" "2040-7-30"
-##  [85] "2041-7-30" "2042-7-30" "2043-7-29" "2044-7-30" "2045-7-30" "2046-7-30"
-##  [91] "2047-7-30" "2048-7-30" "2049-7-30" "2050-7-30" "2051-7-30" "2052-7-29"
-##  [97] "2053-7-29" "2054-7-29" "2055-7-29" "2056-7-29" "2057-7-29" "2058-7-29"
-## [103] "2059-7-30" "2060-7-30" "2061-7-30" "2062-7-29" "2063-7-29" "2064-7-30"
-## [109] "2065-7-30" "2066-7-29" "2067-7-29" "2068-7-30" "2069-7-29" "2070-7-29"
-## [115] "2071-7-29" "2072-7-30" "2073-7-30" "2074-7-30" "2075-7-30" "2076-7-29"
-## [121] "2077-7-29" "2078-7-30" "2079-7-29" "2080-7-29" "2081-7-30" "2082-7-30"
-## [127] "2083-7-29" "2084-7-30" "2085-7-29" "2086-7-29" "2087-7-30"
-\end{verbatim}
 
 \hypertarget{generate-time-series-based-on-genhol-function-using-dates-of-diwali-as-input}{%
 \subsection{Generate time-series based on `genhol()` function using
@@ -335,22 +258,6 @@ Diwali}\label{generate-time-series-based-on-vedic-calendar-dates-of-diwali}}
 time-series class object and represent 2 time-series to include pre and
 post festival for better seasonal adjustment.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ts.plot}\NormalTok{(pre\_diwali\_ts\_vedic,}\AttributeTok{lwd =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{regressors_of_diwali_seasonality_for_industrial_production_files/figure-latex/unnamed-chunk-6-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ts.plot}\NormalTok{(post\_diwali\_ts\_vedic,}\AttributeTok{lwd =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{regressors_of_diwali_seasonality_for_industrial_production_files/figure-latex/unnamed-chunk-6-2.pdf}
-
 \hypertarget{generate-time-series-with-gregorian-calendar-system-for-diwali}{%
 \paragraph{Generate time-series with Gregorian calendar system for
 Diwali}\label{generate-time-series-with-gregorian-calendar-system-for-diwali}}
@@ -359,23 +266,20 @@ Diwali}\label{generate-time-series-with-gregorian-calendar-system-for-diwali}}
 \begin{Highlighting}[]
 \NormalTok{pre\_diwali\_ts}\OtherTok{\textless{}{-}} \FunctionTok{genhol}\NormalTok{(seasonal}\SpecialCharTok{::}\NormalTok{diwali, }\AttributeTok{start =} \SpecialCharTok{{-}}\DecValTok{6}\NormalTok{, }\AttributeTok{end =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{center =} \StringTok{"mean"}\NormalTok{)}
 \NormalTok{post\_diwali\_ts}\OtherTok{\textless{}{-}} \FunctionTok{genhol}\NormalTok{(seasonal}\SpecialCharTok{::}\NormalTok{diwali, }\AttributeTok{start =} \DecValTok{0}\NormalTok{, }\AttributeTok{end =} \DecValTok{6}\NormalTok{, }\AttributeTok{center =} \StringTok{"mean"}\NormalTok{)}
-\FunctionTok{ts.plot}\NormalTok{(pre\_diwali\_ts,}\AttributeTok{lwd =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\FunctionTok{ts.plot}\NormalTok{(pre\_diwali\_ts,}\AttributeTok{lwd =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{),  }\AttributeTok{gpars=}\FunctionTok{list}\NormalTok{(}\AttributeTok{xlab=}\StringTok{"Time"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Pre Diwali Time{-}series"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Pre Diwali Indian Industrial Input Indiactor"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{regressors_of_diwali_seasonality_for_industrial_production_files/figure-latex/unnamed-chunk-7-1.pdf}
+\includegraphics{regressors_of_diwali_seasonality_for_industrial_production_files/figure-latex/unnamed-chunk-5-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ts.plot}\NormalTok{(post\_diwali\_ts,}\AttributeTok{lwd =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\FunctionTok{ts.plot}\NormalTok{(post\_diwali\_ts,}\AttributeTok{lwd =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{gpars=}\FunctionTok{list}\NormalTok{(}\AttributeTok{xlab=}\StringTok{"Time"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Post Diwali Time{-}series"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Post Diwali Indian Industrial Input Indiactor"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{regressors_of_diwali_seasonality_for_industrial_production_files/figure-latex/unnamed-chunk-7-2.pdf}
-
-\hypertarget{including-user-defined-regressors}{%
-\subsubsection{Including user defined
-regressors}\label{including-user-defined-regressors}}
+\includegraphics{regressors_of_diwali_seasonality_for_industrial_production_files/figure-latex/unnamed-chunk-6-1.pdf}
+\#\#\# Including user defined regressors
 
 \hypertarget{converting-india-industrial-output-time-series-object-to-vedic-calendar-system}{%
 \subsubsection{Converting India Industrial Output time-series object to
@@ -399,31 +303,8 @@ object to model seasonality\\
 \NormalTok{\}}
 \NormalTok{iip\_data}\SpecialCharTok{$}\NormalTok{date }\OtherTok{\textless{}{-}}\NormalTok{ iip\_vedic\_calendar}
 \NormalTok{iip\_vedic\_data\_ts }\OtherTok{\textless{}{-}} \FunctionTok{ts}\NormalTok{(iip\_data}\SpecialCharTok{$}\NormalTok{Y,}\AttributeTok{start=}\FunctionTok{c}\NormalTok{(}\DecValTok{2061}\NormalTok{,}\DecValTok{2}\NormalTok{))}
-\NormalTok{iip\_vedic\_data\_ts}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## Time Series:
-## Start = 2062 
-## End = 2177 
-## Frequency = 1 
-##   [1]  99.0838 103.0900 103.9666 102.4425 104.1004 104.4108 107.3272 104.6366
-##   [9] 116.8191 118.4664 112.4255 126.7159 108.8396 114.8274 114.2126 117.6044
-##  [17] 114.2655 118.1773 117.6792 125.5368 132.7696 134.8564 127.8147 144.8739
-##  [25] 128.2021 136.8587 136.7408 136.6459 134.5998 133.9824 140.7213 137.9242
-##  [33] 150.7315 152.5200 149.3196 161.8845 142.3296 146.7452 148.3757 144.2976
-##  [41] 141.8657 148.5866 146.1718 139.6522 148.2840 144.3709 138.5057 153.5340
-##  [49] 139.5905 144.2723 145.7417 146.7192 149.4225 151.0090 149.6481 148.4985
-##  [57] 162.3779 163.6191 157.5185 176.4743 157.8465 156.5436 156.5543 161.3000
-##  [65] 156.1000 160.3000 166.6000 158.0000 175.6000 175.9000 168.0000 193.1000
-##  [73] 166.2000 166.2000 171.4000 167.2000 161.4000 164.3000 158.3000 167.5000
-##  [81] 180.3000 177.6000 175.2000 187.6000 164.1000 170.3000 168.0000 167.1000
-##  [89] 164.7000 163.1000 171.6000 165.8000 179.3000 182.0000 176.2000 194.2000
-##  [97] 166.5000 166.0000 164.9000 171.4000 165.4000 167.5000 169.6000 163.6000
-## [105] 179.5000 184.0000 172.7000 193.3000 172.7000 175.3000 172.0000 173.0000
-## [113] 166.2000 172.2000 162.5000 169.8000
-\end{verbatim}
 
 The \texttt{seasonal} package allows to add user-defined regressors to
 remove seasonality from a time-series. Here \texttt{pre\_diwali\_ts} and
@@ -470,18 +351,23 @@ chosen as the decomposition effect.
 \end{verbatim}
 
 The seasonal co-efficient shows minor decline during pre and post Diwali
-season across the time-series. In the below unadjusted v adjusted
+season across the time-series. In the below non-adjusted v adjusted
 seasonal plot it can be observed that seasonal adjustment based on
 Diwali season removes distortion from the time-series.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{plot}\NormalTok{(m1)}
+\FunctionTok{plot}\NormalTok{(m1, }\AttributeTok{xlab=}\StringTok{"Year"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Indicator"}\NormalTok{, }\AttributeTok{main =} \StringTok{" Non{-}adjusted v Adjusted Seasonal Distribution"}\NormalTok{)}
 \FunctionTok{lines}\NormalTok{(iip\_vedic\_data\_ts, }\AttributeTok{col=}\StringTok{"red"}\NormalTok{)}
+\FunctionTok{legend}\NormalTok{(}\AttributeTok{x =} \StringTok{"bottomright"}\NormalTok{,          }
+       \AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"Non{-}Adjusted"}\NormalTok{, }\StringTok{"Adjusted"}\NormalTok{),}
+       \AttributeTok{lty =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{),           }
+       \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{, }\StringTok{"red"}\NormalTok{),}
+       \AttributeTok{lwd =} \DecValTok{2}\NormalTok{)       }
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{regressors_of_diwali_seasonality_for_industrial_production_files/figure-latex/unnamed-chunk-11-1.pdf}
+\includegraphics{regressors_of_diwali_seasonality_for_industrial_production_files/figure-latex/unnamed-chunk-10-1.pdf}
 
 \hypertarget{comparing-the-series}{%
 \subsubsection{Comparing the series}\label{comparing-the-series}}
@@ -491,12 +377,16 @@ Diwali season removes distortion from the time-series.
 \NormalTok{m2 }\OtherTok{\textless{}{-}} \FunctionTok{seas}\NormalTok{(}\AttributeTok{x =}\NormalTok{ iip, }\AttributeTok{x11 =} \FunctionTok{list}\NormalTok{(), }\AttributeTok{regression.variables =} \FunctionTok{c}\NormalTok{(}\StringTok{"td1coef"}\NormalTok{, }\StringTok{"ls2008.Nov"}\NormalTok{), }
            \AttributeTok{arima.model =} \StringTok{"(0 1 1)(0 1 1)"}\NormalTok{, }\AttributeTok{regression.aictest =} \ConstantTok{NULL}\NormalTok{, }\AttributeTok{outlier =} \ConstantTok{NULL}\NormalTok{, }
            \AttributeTok{transform.function =} \StringTok{"log"}\NormalTok{)}
-\FunctionTok{ts.plot}\NormalTok{(}\FunctionTok{diff}\NormalTok{(}\FunctionTok{log}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(}\FunctionTok{final}\NormalTok{(m1), }\FunctionTok{final}\NormalTok{(m2)))), }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{), }
-        \AttributeTok{lwd =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\FunctionTok{ts.plot}\NormalTok{(}\FunctionTok{diff}\NormalTok{(}\FunctionTok{log}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(}\FunctionTok{final}\NormalTok{(m1), }\FunctionTok{final}\NormalTok{(m2)))), }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{), }\AttributeTok{lwd =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{),  }\AttributeTok{gpars=}\FunctionTok{list}\NormalTok{(}\AttributeTok{xlab=}\StringTok{"Year"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Indicator"}\NormalTok{, }\AttributeTok{main=}\StringTok{"Comparing between 2 seasonal log adjusted series"}\NormalTok{))}
+\FunctionTok{legend}\NormalTok{(}\AttributeTok{x =} \StringTok{"bottomright"}\NormalTok{,          }
+       \AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"Non{-}Adjusted"}\NormalTok{, }\StringTok{"Adjusted"}\NormalTok{),}
+       \AttributeTok{lty =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{),           }
+       \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{),}
+       \AttributeTok{lwd =} \DecValTok{2}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{regressors_of_diwali_seasonality_for_industrial_production_files/figure-latex/unnamed-chunk-12-1.pdf}
+\includegraphics{regressors_of_diwali_seasonality_for_industrial_production_files/figure-latex/unnamed-chunk-11-1.pdf}
 
 In the above chart, non-adjusted(blue) vs adjusted(red) seasonal plot
 clearly shows the amount of distortion present in the series.
@@ -506,11 +396,16 @@ industrial output due to Diwali festival.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ts.plot}\NormalTok{(}\FunctionTok{final}\NormalTok{(m1), }\FunctionTok{final}\NormalTok{(m2), }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{), }\AttributeTok{lwd =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\FunctionTok{ts.plot}\NormalTok{(}\FunctionTok{final}\NormalTok{(m1), }\FunctionTok{final}\NormalTok{(m2), }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{), }\AttributeTok{lwd =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{), }\AttributeTok{gpars=}\FunctionTok{list}\NormalTok{(}\AttributeTok{xlab=}\StringTok{"Year"}\NormalTok{, }\AttributeTok{ylab=}\StringTok{"Indicator"}\NormalTok{, }\AttributeTok{main=}\StringTok{"Comparing between 2 seasonal series"}\NormalTok{))}
+\FunctionTok{legend}\NormalTok{(}\AttributeTok{x =} \StringTok{"bottomright"}\NormalTok{,          }
+       \AttributeTok{legend =} \FunctionTok{c}\NormalTok{(}\StringTok{"Non{-}Adjusted"}\NormalTok{, }\StringTok{"Adjusted"}\NormalTok{),}
+       \AttributeTok{lty =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{),           }
+       \AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"blue"}\NormalTok{, }\StringTok{"red"}\NormalTok{),}
+       \AttributeTok{lwd =} \DecValTok{2}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{regressors_of_diwali_seasonality_for_industrial_production_files/figure-latex/unnamed-chunk-13-1.pdf}
+\includegraphics{regressors_of_diwali_seasonality_for_industrial_production_files/figure-latex/unnamed-chunk-12-1.pdf}
 
 \hypertarget{multi-seasonality-decomposition-for-india-industrial-output}{%
 \subsection{Multi-seasonality decomposition for India industrial
@@ -518,24 +413,6 @@ output}\label{multi-seasonality-decomposition-for-india-industrial-output}}
 
 (\textbf{forecast?}) library was used to identify multiple seasonality
 present in the data-set and understand the difference between them.
-
-\hypertarget{seasonality-decomposition-for-industrial-output-for-gregorian-calendar}{%
-\subsubsection{Seasonality decomposition for Industrial Output for
-Gregorian
-Calendar}\label{seasonality-decomposition-for-industrial-output-for-gregorian-calendar}}
-
-The start of the series is from year 2000 according to Gregoriann
-calendar system
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{iip\_tbats }\OtherTok{\textless{}{-}}\NormalTok{ forecast}\SpecialCharTok{::}\FunctionTok{msts}\NormalTok{(industrial\_prod, }\AttributeTok{start=}\DecValTok{2000}\NormalTok{, }\AttributeTok{seasonal.periods =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{))}
-\NormalTok{fit }\OtherTok{\textless{}{-}}\NormalTok{ forecast}\SpecialCharTok{::}\FunctionTok{tbats}\NormalTok{(iip\_tbats)}
-\FunctionTok{plot}\NormalTok{(fit)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{regressors_of_diwali_seasonality_for_industrial_production_files/figure-latex/unnamed-chunk-14-1.pdf}
 
 \hypertarget{seasonality-decomposition-for-industrial-output-for-vedic-calendar}{%
 \subsubsection{Seasonality decomposition for Industrial Output for Vedic
@@ -552,7 +429,7 @@ which is equivalent to 2000
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{regressors_of_diwali_seasonality_for_industrial_production_files/figure-latex/unnamed-chunk-15-1.pdf}
+\includegraphics{regressors_of_diwali_seasonality_for_industrial_production_files/figure-latex/unnamed-chunk-13-1.pdf}
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}

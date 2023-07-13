@@ -10,13 +10,14 @@ bibliography: references.bib
 
 Diwali is the most important festival of India and the timing of its distorts the monthly time-series of industrial production heavily. Generally Diwali is celebrated in the month of October according to Gregorian Calendar but that is not fixed and depending on which month it is celebrated the industrial production index also changes. The standard software packages for seasonal adjustment, `X-12-ARIMA` and `X-13-ARIMA-SEATS` (developed by the U.S. Census Bureau) or Tramo Seats (developed by the Bank of Spain) have a built-in adjustment procedure for Easter holiday, but not for Diwali. However, all packages allow for the inclusion of user defined variables, and the Chinese New Year can be modeled as such. `seasonal` [@seasonal] is an interface to X-13ARIMA-SEATS.
 
-```{r}
+```{r setup, warning=FALSE}
 rm(list = ls())
 library(seasonal)
 library(VedicDateTime)
 library(insol)
 library(forecast)
 library(zoo)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 data(seasonal)
 data(holiday)
 ```
@@ -25,7 +26,6 @@ data(holiday)
 
 ```{r}
 industrial_prod <- window(iip, start = 2000)
-industrial_prod
 ```
 
 ## Convert Gregorian dates of Diwali holidays to Vedic calendar dates
@@ -57,7 +57,6 @@ for (i in 1:length(julianday))
 {
   diwali_vedic_calendar = c(diwali_vedic_calendar, get_vedic_date(julianday[i], place))
 }
-diwali_vedic_calendar
 ```
 
 ## Generate time-series based on \`genhol()\` function using dates of Diwali as input
@@ -71,20 +70,16 @@ post_diwali_ts_vedic <- genhol(as.Date(diwali_vedic_calendar), start = 0, end = 
 
 `pre_diwali_ts` and `post_diwali_ts` both are of time-series class object and represent 2 time-series to include pre and post festival for better seasonal adjustment.
 
-```{r}
-ts.plot(pre_diwali_ts_vedic,lwd = c(2, 1))
-ts.plot(post_diwali_ts_vedic,lwd = c(2, 1))
-```
-
 #### Generate time-series with Gregorian calendar system for Diwali
 
 ```{r}
 pre_diwali_ts<- genhol(seasonal::diwali, start = -6, end = -1, center = "mean")
 post_diwali_ts<- genhol(seasonal::diwali, start = 0, end = 6, center = "mean")
-ts.plot(pre_diwali_ts,lwd = c(2, 1))
-ts.plot(post_diwali_ts,lwd = c(2, 1))
+ts.plot(pre_diwali_ts,lwd = c(2, 1),  gpars=list(xlab="Time", ylab="Pre Diwali Time-series", main = "Pre Diwali Indian Industrial Input Indiactor"))
 ```
-
+```{r}
+ts.plot(post_diwali_ts,lwd = c(2, 1), gpars=list(xlab="Time", ylab="Post Diwali Time-series", main = "Post Diwali Indian Industrial Input Indiactor"))
+```
 ### Including user defined regressors
 
 ### Converting India Industrial Output time-series object to Vedic Calendar system
@@ -104,7 +99,6 @@ iip_vedic_calendar = c(iip_vedic_calendar, get_vedic_date(julianday_iip[i], plac
 }
 iip_data$date <- iip_vedic_calendar
 iip_vedic_data_ts <- ts(iip_data$Y,start=c(2061,2))
-iip_vedic_data_ts
 ```
 
 The `seasonal` package allows to add user-defined regressors to remove seasonality from a time-series. Here `pre_diwali_ts` and `post_diwali_ts` are added in the main seasonal adjustment. `X-13ARIMA-SEATS` is used to adjust for the festival seasonal component.
@@ -119,11 +113,16 @@ m1 <- seas(industrial_prod, xreg = cbind(pre_diwali_ts, post_diwali_ts), regress
 summary(m1)
 ```
 
-The seasonal co-efficient shows minor decline during pre and post Diwali season across the time-series. In the below unadjusted v adjusted seasonal plot it can be observed that seasonal adjustment based on Diwali season removes distortion from the time-series.
+The seasonal co-efficient shows minor decline during pre and post Diwali season across the time-series. In the below non-adjusted v adjusted seasonal plot it can be observed that seasonal adjustment based on Diwali season removes distortion from the time-series.
 
 ```{r}
-plot(m1)
+plot(m1, xlab="Year", ylab="Indicator", main = " Non-adjusted v Adjusted Seasonal Distribution")
 lines(iip_vedic_data_ts, col="red")
+legend(x = "bottomright",          
+       legend = c("Non-Adjusted", "Adjusted"),
+       lty = c(1, 2),           
+       col = c("black", "red"),
+       lwd = 2)       
 ```
 
 ### Comparing the series
@@ -132,8 +131,12 @@ lines(iip_vedic_data_ts, col="red")
 m2 <- seas(x = iip, x11 = list(), regression.variables = c("td1coef", "ls2008.Nov"), 
            arima.model = "(0 1 1)(0 1 1)", regression.aictest = NULL, outlier = NULL, 
            transform.function = "log")
-ts.plot(diff(log(cbind(final(m1), final(m2)))), col = c("red", "blue"), 
-        lwd = c(2, 1))
+ts.plot(diff(log(cbind(final(m1), final(m2)))), col = c("red", "blue"), lwd = c(2, 1),  gpars=list(xlab="Year", ylab="Indicator", main="Comparing between 2 seasonal log adjusted series"))
+legend(x = "bottomright",          
+       legend = c("Non-Adjusted", "Adjusted"),
+       lty = c(1, 2),           
+       col = c("blue", "red"),
+       lwd = 2) 
 ```
 
 In the above chart, non-adjusted(blue) vs adjusted(red) seasonal plot clearly shows the amount of distortion present in the series.
@@ -141,22 +144,17 @@ In the above chart, non-adjusted(blue) vs adjusted(red) seasonal plot clearly sh
 The below chart also indicated a level of distortion present for industrial output due to Diwali festival.
 
 ```{r}
-ts.plot(final(m1), final(m2), col = c("red", "blue"), lwd = c(2, 1))
+ts.plot(final(m1), final(m2), col = c("red", "blue"), lwd = c(2, 1), gpars=list(xlab="Year", ylab="Indicator", main="Comparing between 2 seasonal series"))
+legend(x = "bottomright",          
+       legend = c("Non-Adjusted", "Adjusted"),
+       lty = c(1, 2),           
+       col = c("blue", "red"),
+       lwd = 2) 
 ```
 
 ## Multi-seasonality decomposition for India industrial output
 
 @forecast library was used to identify multiple seasonality present in the data-set and understand the difference between them.
-
-### Seasonality decomposition for Industrial Output for Gregorian Calendar
-
-The start of the series is from year 2000 according to Gregoriann calendar system
-
-```{r}
-iip_tbats <- forecast::msts(industrial_prod, start=2000, seasonal.periods = c(1))
-fit <- forecast::tbats(iip_tbats)
-plot(fit)
-```
 
 ### Seasonality decomposition for Industrial Output for Vedic Calendar
 
